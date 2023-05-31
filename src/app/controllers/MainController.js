@@ -1262,6 +1262,12 @@ class MainController {
   adminluunhapkho(req, res) {
     var arrayNew = [];
     var receipt = new Receipt(req.body);
+    if (!req.body.time) {
+      receipt.time = new Date();
+    } else {
+      receipt.time = new Date(req.body.time);
+    }
+    console.log('time-----', receipt.time);
     if (req.session.isAuth) {
       ProductTemp.find((err, arrayNews) => {
         if (!err) {
@@ -2554,6 +2560,110 @@ class MainController {
     }
   }
 
+  thanhtoandonhangkh(req, res) {
+    var sumPrice = 0;
+    const array = [];
+    const listCartNew = [];
+    var numberCart = 0;
+    if (req.session.isAuth) {
+      Cart.find(
+        {
+          idCustomer: req.session.userId,
+          status: 1,
+        },
+        (err, listCart) => {
+          if (!err) {
+            if (listCart.length > 0) {
+              for (var i = 0; i < listCart.length; i++) {
+                numberCart += listCart[i].quality;
+                const productCart = new ProductCart();
+                productCart.idProductCart = listCart[i].idProduct;
+                productCart.idCart = listCart[i].idCart;
+                productCart.qualityCart = listCart[i].quality;
+                productCart.idCustomer = listCart[i].idCustomer;
+                productCart.orderDate = listCart[i].orderDate;
+                productCart.statusCart = listCart[i].status;
+
+                Product.findOne(
+                  { idProduct: listCart[i].idProduct },
+                  (err, pro) => {
+                    if (!err) {
+                      listCartNew.push(pro);
+                      productCart.name = pro.name;
+                      productCart.idCategory = pro.idCategory;
+                      productCart.idSupplier = pro.idSupplier;
+                      productCart.dateAdded = pro.dateAdded;
+                      productCart.manufacturingDate = pro.manufacturingDate;
+                      productCart.expiryDate = pro.expiryDate;
+                      productCart.imageList = pro.imageList;
+                      productCart.importPrice = pro.importPrice;
+                      productCart.salePrice = pro.salePrice;
+                      productCart.format = pro.format;
+                      productCart.packingForm = pro.packingForm;
+                      productCart.uses = pro.uses;
+                      productCart.component = pro.component;
+                      productCart.specified = pro.specified;
+                      productCart.antiDefinition = pro.antiDefinition;
+                      productCart.dosage = pro.dosage;
+                      productCart.sideEffects = pro.sideEffects;
+                      productCart.careful = pro.careful;
+                      productCart.preserve = pro.preserve;
+                      productCart.trademark = pro.trademark;
+                      productCart.origin = pro.origin;
+                      productCart.quality = pro.quality;
+                      productCart.sold = pro.sold;
+                      productCart.retailQuantity = pro.retailQuantity;
+                      productCart.quantityPerBox = pro.quantityPerBox;
+                      productCart.retailQuantityPack = pro.retailQuantityPack;
+                      productCart.status = pro.status;
+                      productCart.isLimit = pro.isLimit;
+                      sumPrice += pro.salePrice * productCart.qualityCart;
+                      array.push(productCart);
+
+                      if (listCartNew.length == listCart.length) {
+                        res.render('thanhtoandonhangkh', {
+                          numberCart: numberCart,
+                          array: array,
+                          sumPrice: sumPrice,
+                          accountId: req.session.accountId,
+                          username: req.session.username,
+                          role: req.session.role,
+                          userId: req.session.userId,
+                          avatar: req.session.avatar,
+                          fullname: req.session.fullname,
+                        });
+                      }
+                    } else {
+                      res.status(400).json({ error: 'ERROR!!!' });
+                    }
+                  }
+                ).lean();
+              }
+            } else {
+              numberCart = 0;
+              res.render('thanhtoandonhangkh', {
+                numberCart: 0,
+                array: array,
+                sumPrice: 0,
+                accountId: req.session.accountId,
+                username: req.session.username,
+                role: req.session.role,
+                userId: req.session.userId,
+                avatar: req.session.avatar,
+                fullname: req.session.fullname,
+              });
+            }
+          } else {
+            res.status(400).json({ error: 'ERROR!!!' });
+          }
+        }
+      ).lean();
+    } else {
+      req.session.back = '/home';
+      res.redirect('/login/');
+    }
+  }
+
   thanhtoankh(req, res) {
     var sumPrice = 0;
     const array = [];
@@ -2602,7 +2712,7 @@ class MainController {
               payments.idCart = array;
               payments.totalMoney = sumPrice;
               payments.totalQuality = sumQuality;
-              payments.paymentType = 'Tiền mặt';
+              payments.paymentType = req.body.paymentType;
               payments.status = 1;
               payments.idCustomer = req.session.userId;
               payments

@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 const Receipt = new Schema(
   {
     idReceipt: { type: Number },
-    time: { type: Date, default: Date.now },
+    time: { type: Date },
     idInvoice: { type: Number },
     idSupplier: { type: String, maxLength: 255 },
     totalMoney: { type: Number },
