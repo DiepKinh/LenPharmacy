@@ -1,4 +1,4 @@
-<div class="quanlydonhangds">
+<div class="quanlydonhangonlineds">
 {{!-- Nhân viên --}}
             {{>menubarnv}}
 
@@ -6,8 +6,8 @@
                 {{>header}}
             <div class="main-home-nv ">
                 <div class="title_chucnang">
-                    <i class='fa fa-th-list'></i>
-                    <p>Quản lý đơn hàng tại quầy</p>
+                    <i class='fa fa-shopping-bag'></i>
+                    <p>Quản lý đơn hàng online</p>
                 </div>
                 <div class="line" ></div>
                 <div id="menu1" class="container tab-pane active div-table-list"><br />
@@ -19,7 +19,7 @@
                                         <tr>
                                             <th>STT</th>
                                             <th>Mã đơn hàng</th>
-                                            <th>Tên khách hàng</th>
+                                            <th>Mã khách hàng</th>
                                             <th>Tổng số sản phẩm</th>
                                             <th>Tổng tiền</th>
                                             <th>Ngày thanh toán</th>
@@ -32,15 +32,15 @@
                                             {{#each array}}
                                         <tr>
                                             <td>{{sum @index 1}}</td>
-                                            <td>{{this.idOrderDetail}}</td>
-                                            <td>Khách lẻ</td>
+                                            <td>{{this.idPayment}}</td>
+                                            <td>{{this.idCustomer}}</td>
                                             <td>{{this.totalQuality}}</td>
                                             <td style="color: #3871C1;">{{{changeNumber this.totalMoney}}}</td>
                                             <td>{{{changeNgay this.time}}}</td>
                                             <td>{{this.paymentType}}</td>
                                             <td style="color: green;">Đã thanh toán</td>
                                             <td>
-                                                <a href="/quanly/xemchitietdonhang/{{this.idOrderDetail}}"  class="btn btn-info">Xem chi tiết</a>
+                                                <a href="/quanly/xemchitietdonhangonline/{{this.idPayment}}"  class="btn btn-info">Xem chi tiết</a>
                                                 
                                             </td>
                                         </tr>

@@ -1,4 +1,4 @@
-<div class="quanlyxemchitietdonhangds">
+<div class="quanlyonlinexemchitietdonhangds">
 {{!-- Nhân viên --}}
             {{>menubarnv}}
 
@@ -6,14 +6,14 @@
                 {{>header}}
             <div class="main-home-nv ">
                 <div class="title_chucnang">
-                    <i class='fa fa-th-list'></i>
-                    <p>Chi tiết đơn hàng {{idOrderDetail}}</p>
+                    <i class='fa fa-shopping-bag'></i>
+                    <p>Chi tiết đơn hàng onine {{idPayment}}</p>
                 </div>
                 <div class="line" ></div>
                 <div id="menu1" class="container">
                     <div class="body_container">
                         <div class="header_body">
-                            <a class="btnBack" href="/quanly/quanlydonhang">
+                            <a class="btnBack" href="/quanly/quanlydonhangonline">
                                 <i class="fa fa-angle-left" aria-hidden="true" style=" font-size: 24px; margin-right:5px"></i>
                                <span>
                                     TRỞ LẠI
@@ -22,11 +22,11 @@
 
                             <div class="ma_hoa_don">
                                 <span>
-                                    MÃ NHÂN VIÊN: {{idEmployee}}
+                                    MÃ KHÁCH HÀNG: {{idEmployee}}
                                 </span>
                                 <div class="line_col"></div>
                                 <span>
-                                    MÃ HOÁ ĐƠN: {{idOrderDetail}}
+                                    MÃ HOÁ ĐƠN: {{idPayment}}
                                 </span>
                                 <div class="line_col"></div>
                                 <span style="color: #2DC258">
@@ -50,8 +50,8 @@
 
                             <div class="tong_tien">
                                 <div class="item_body">
-                                    <div class="title">Tên khách hàng</div>
-                                    <div class="content" >Khách lẻ</div>
+                                    <div class="title">Mã khách hàng</div>
+                                    <div class="content" >{{orderDetail.idCustomer}}</div>
                                 </div>
                                 <div class="item_body">
                                     <div class="title">Tổng sản phẩm</div>
@@ -68,10 +68,6 @@
                                  <div class="item_body">
                                     <div class="title">Thành tiền</div>
                                     <div class="content" style="color: #3871C1; font-size: 22px;">{{{changeNumber orderDetail.totalMoney}}} đ</div>
-                                </div>
-                                <div class="item_body">
-                                    <div class="title">Khách trả</div>
-                                    <div class="content" >{{{changeNumber orderDetail.totalMoney}}} đ</div>
                                 </div>
                                 <div class="item_body">
                                     <div class="title">Phương thức thành toán</div>

@@ -1,0 +1,154 @@
+
+.quanlyonlinexemchitietdonhangds {
+  background-color: #F7F7F8;
+}
+
+.quanlyonlinexemchitietdonhangds .home-header-main {
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+  margin-left: 20.4%;
+  height: 100%;
+}
+.quanlyonlinexemchitietdonhangds .main-home-nv {
+  display: flex;
+  margin-top: 60px;
+  width: 100%;
+  flex-direction: column;
+}
+.quanlyonlinexemchitietdonhangds .main-home-nv .title_chucnang{
+  display: flex;
+  height: 50px;
+  width: 100%;
+  padding: 10px;
+}
+.quanlyonlinexemchitietdonhangds .main-home-nv .title_chucnang p{
+  font-size: 26px;
+  font-weight: 600;
+  color: #3871C1;
+}
+.quanlyonlinexemchitietdonhangds .main-home-nv .title_chucnang i{
+  font-size:26px;
+  margin-right: 5px;
+  color: #3871C1;
+  margin-top: 8px;
+}
+.quanlyonlinexemchitietdonhangds .main-home-nv .line {
+  height: 1px;
+  background-color: #cccccc;
+  width: 100%;
+}  
+.quanlyonlinexemchitietdonhangds form thead {
+  background-color: #F4F7F9;
+  color: #3871C1;
+} 
+
+.quanlyonlinexemchitietdonhangds .container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  padding-top: 10px;
+}  
+
+.quanlyonlinexemchitietdonhangds .container .body_container{
+  display: flex;
+  width: 96%;
+  background-color: white;
+  height: 1000px;
+  flex-direction: column;
+} 
+
+.quanlyonlinexemchitietdonhangds   .body_container .header_body{
+  display: flex;
+  width: 100%;
+  height: 50px;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 1px solid #cccccc;
+  align-items: center;
+} 
+
+.quanlyonlinexemchitietdonhangds   .body_container .header_body .btnBack{
+  display: flex;
+  color: #757575;
+  padding: 5px;
+  text-decoration: none;
+} 
+
+.quanlyonlinexemchitietdonhangds   .body_container .header_body .ma_hoa_don{
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+} 
+.quanlyonlinexemchitietdonhangds   .body_container .header_body .ma_hoa_don .line_col{
+  display: flex;
+  height: 50%;
+  width: 2px;
+  background-color: #757575;
+  margin: 0 20px;
+}
+
+.quanlyonlinexemchitietdonhangds   .body_container .main_body {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+} 
+
+.quanlyonlinexemchitietdonhangds   .body_container .main_body .item_sanpham{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100px;
+  align-items: center;
+  border-bottom: 1px solid #E6E6E6;
+  background-color:#FAFAFA ;
+  padding: 0 10px;
+} 
+
+.quanlyonlinexemchitietdonhangds   .body_container .main_body .info_sanpham{
+  display: flex;
+  flex-direction: column;
+} 
+
+.quanlyonlinexemchitietdonhangds .main_body .tong_tien{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+} 
+
+.quanlyonlinexemchitietdonhangds .main_body .tong_tien .item_body{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  height: 40px;
+  border-bottom: 1px dotted #E6E6E6;
+  align-items: center;
+} 
+.quanlyonlinexemchitietdonhangds .main_body .tong_tien .item_body .title{
+  display: flex;
+  width: 70%;
+  border-right: 1px dotted #E6E6E6;
+  height: 100%;
+  align-self: center;
+  align-items: center;
+  justify-content: end;
+  padding-right: 20px;
+  color: #737373;
+} 
+.quanlyonlinexemchitietdonhangds .main_body .tong_tien .item_body .content{
+  display: flex;
+  height: 100%;
+  width: 30%;
+  align-self: center;
+  align-items: center;
+  justify-content: end;
+  padding-right: 20px;
+  color: #454545;
+  font-weight: 600;
+  font-size: 18px;
+} 

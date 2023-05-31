@@ -643,6 +643,126 @@ class MainController {
     }
   }
 
+  quanlydonhangonlineds(req, res) {
+    if (req.session.isAuth) {
+      Payment.find((err, array) => {
+        if (!err) {
+          if (array.length > 0) {
+            array.sort(function (a, b) {
+              return b.time - a.time;
+            });
+          }
+          res.render('quanlydonhangonlineds', {
+            array: array,
+            accountId: req.session.accountId,
+            username: req.session.username,
+            role: req.session.role,
+            userId: req.session.userId,
+            avatar: req.session.avatar,
+            fullname: req.session.fullname,
+          });
+        } else {
+          res.status(400).json({ error: 'ERROR!!!' });
+        }
+      }).lean();
+    } else {
+      req.session.back = '/quanly/home';
+      res.redirect('/quanly/login/');
+    }
+  }
+
+  quanlyonlinexemchitietdonhangds(req, res) {
+    var listIdOrder = [];
+    var listOrder = [];
+    var listOrderTemp = [];
+    var idEmployee;
+    if (req.session.isAuth) {
+      Payment.findOne(
+        { idPayment: Number(req.params.idPayment) },
+        (err, orderDetail) => {
+          if (!err) {
+            if (orderDetail) {
+              listIdOrder = orderDetail.idCart;
+              for (var i = 0; i < listIdOrder.length; i++) {
+                Cart.findOne(
+                  {
+                    idCart: Number(listIdOrder[i]),
+                  },
+                  (err, order) => {
+                    if (!err) {
+                      if (order) {
+                        idEmployee = order.idCustomer;
+                        console.log('TEST-------idEmployee', idEmployee, i);
+                        listOrder.push(order);
+                        if (i == listIdOrder.length) {
+                          if (listOrder.length > 0) {
+                            console.log(
+                              'TEST-------listOrder',
+                              listOrder.length
+                            );
+                            for (var j = 0; j < listOrder.length; j++) {
+                              const orderTemp = new OrderTemp();
+                              orderTemp.idOrderTemp = listOrder[j].idOrder;
+                              orderTemp.idEmployee = listOrder[j].idEmployee;
+                              orderTemp.idProduct = listOrder[j].idProduct;
+                              orderTemp.quality = listOrder[j].quality;
+                              orderTemp.salePrice = listOrder[j].salePrice;
+                              orderTemp.orderDate = listOrder[j].orderDate;
+                              orderTemp.status = listOrder[j].status;
+                              orderTemp.createdAt = listOrder[j].createdAt;
+                              orderTemp.updatedAt = listOrder[j].updatedAt;
+                              Product.findOne(
+                                { idProduct: listOrder[j].idProduct },
+                                (err, pro) => {
+                                  if (!err) {
+                                    orderTemp.nameProduct = pro.name;
+                                    orderTemp.imageProduct = pro.imageList;
+                                    orderTemp.packingForm = pro.packingForm;
+                                    listOrderTemp.push(orderTemp);
+                                    if (j == listOrder.length) {
+                                      res.render(
+                                        'quanlyonlinexemchitietdonhangds',
+                                        {
+                                          idPayment: req.params.idPayment,
+                                          orderDetail: orderDetail,
+                                          listOrderTemp: listOrderTemp,
+                                          idEmployee: idEmployee,
+                                          accountId: req.session.accountId,
+                                          username: req.session.username,
+                                          role: req.session.role,
+                                          userId: req.session.userId,
+                                          avatar: req.session.avatar,
+                                          fullname: req.session.fullname,
+                                        }
+                                      );
+                                    }
+                                  } else {
+                                    res.status(400).json({ error: 'ERROR!!!' });
+                                  }
+                                }
+                              ).lean();
+                            }
+                          }
+                        }
+                      }
+                    } else {
+                      res.status(400).json({ error: 'ERROR!!!' });
+                    }
+                  }
+                ).lean();
+              }
+            }
+          } else {
+            res.status(400).json({ error: 'ERROR!!!' });
+          }
+        }
+      ).lean();
+    } else {
+      req.session.back = '/quanly/home';
+      res.redirect('/quanly/login/');
+    }
+  }
+
   thongkeds(req, res) {
     if (req.session.isAuth) {
       Product.find((err, array) => {

@@ -18,6 +18,11 @@ router.get(
   '/quanly/xemchitietdonhang/:idOrderDetail',
   mainController.quanlyxemchitietdonhangds
 );
+router.get('/quanly/quanlydonhangonline', mainController.quanlydonhangonlineds);
+router.get(
+  '/quanly/xemchitietdonhangonline/:idPayment',
+  mainController.quanlyonlinexemchitietdonhangds
+);
 router.get('/quanly/thongke', mainController.thongkeds);
 router.get('/quanly/xemthongtincanhan', mainController.xemthongtincanhands);
 router.get('/quanly/doimatkhau', mainController.loaddoimatkhau);
